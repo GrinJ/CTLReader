@@ -1,7 +1,7 @@
-from ctl_reader import CTLReader
+from src.CTLReader.CTLReader import CTLReader
 
 #Create object
-forecast = CTLReader('data/d1_mail_2015-08-20-00.ctl')
+forecast = CTLReader('./examples/data/d1_mail_2015-08-20-00.ctl')
 
 #Foop throug all the time variables
 for time in range(0, forecast.tSize):
