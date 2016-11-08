@@ -1,4 +1,3 @@
-import struct
 import re
 import numpy
 
@@ -7,8 +6,16 @@ class CTLReader:
 
     #Constructor, filename - path and filname of *.CTL file
     def __init__(self, filename):
+        """
+        Allows to read files of meteorological fields from the "CTF" format (ARWpost output)
 
-        # Flag of successful file open
+        To work with the class, specify the path to the data file
+
+        :param filename: path to the file
+        :type filename: basestring
+        """
+
+        #Flag of successful file open
         self.noProblem = True
 
         #Main dictionary
@@ -92,16 +99,28 @@ class CTLReader:
             __hgt += value['hgt']
         return __hgt
 
-    #Set the time
+
     def setTime(self, time):
+        """
+        Set the time value from zero to tSize
+
+        :param time: time number from zero to tSize
+        :type time: int
+        """
         if time < self.tSize:
             self.data = self.result[time]
         else:
             self.noProblem = False
 
-    #Check if variable does exists
-    def fieldExists(self, field):
 
+    def fieldExists(self, field):
+        """
+        Check if variable does or not exists
+        :param field: field name from VARS section
+        :type field: str
+        :return: True if exists, False if not
+        :rtype: bool
+        """
         for num, value in self.vars.items():
             if value['var'] == field:
                 return True
