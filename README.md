@@ -24,3 +24,7 @@ Usage
 
 **fieldExists(filed)**
     Check if variable does or not exists
+
+Or create a symbolic link
+
+`ls -s /projectsDir/CTLReader/src/CTLReader/CTLReader.py projectsDir/newProj/`
