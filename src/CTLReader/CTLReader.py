@@ -82,7 +82,7 @@ class CTLReader:
                 for var, value in self.vars.items():
                     self.result[time][value['var']] = {}
                     for hgt in range(0, value['hgt']):
-                        self.result[time][value['var']][hgt] = self.__data[time][__hgt]
+                        self.result[time][value['var']][hgt] = numpy.array( self.__data[time][__hgt] )
                         __hgt += 1
 
             #Set the default value
