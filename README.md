@@ -27,4 +27,4 @@ Usage
 
 Or create a symbolic link
 
-`ls -s /projectsDir/CTLReader/src/CTLReader/CTLReader.py projectsDir/newProj/`
+`ln -s /projectsDir/CTLReader/src/CTLReader/CTLReader.py projectsDir/newProj/`
