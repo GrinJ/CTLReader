@@ -125,3 +125,7 @@ class CTLReader:
             if value['var'] == field:
                 return True
         return False
+
+    #Returns the value by the given key
+    def __getitem__(self, pos):
+        return self.data[pos][0]
