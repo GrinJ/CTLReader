@@ -14,7 +14,7 @@ for time in range(0, forecast.tSize):
 
         #For example print the temperature in the middle of our area on zero model level
         if forecast.fieldExists("T2"):
-            print(forecast.data["T2"][0][forecast.lat//2][forecast.lon//2])
+            print(forecast["T2"][forecast.lat//2][forecast.lon//2])
 
     else:
         print("Some problem happened")
