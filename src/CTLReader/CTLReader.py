@@ -142,4 +142,17 @@ class CTLReader:
 
     #Returns the value by the given key
     def __getitem__(self, pos):
-        return self.data[pos][0]
+        #Check the type of given keys
+        if type(pos) == tuple:
+
+            #Save values
+            key, level = pos
+
+            #Return the value for given level
+            for i in range(0, len(self.levels)):
+                if self.levels[i] == level:
+                    return self.data[key][i]
+
+        #Else return value for first level
+        elif type(pos) == str:
+            return self.data[pos][0]
