@@ -34,12 +34,26 @@ class CTLReader:
             self.options = re.findall( 'options\s*(.+?)\s*\n', data)[0]
             self.Xsize = re.findall( 'xdef\s*([0-9]+)\s*linear', data)[0]
             self.Ysize = re.findall( 'ydef\s*([0-9]+)\s*linear', data)[0]
-            self.Zsize = re.findall( 'zdef\s*([0-9]+)\s*linear', data)[0]
+            self.zType = re.findall('zdef\s*([0-9]+)\s*(linear|levels)', data)[0][1]
+            self.zSize = int(re.findall('zdef\s*([0-9]+)\s*(linear|levels)', data)[0][0])
             self.lat = int(re.findall( 'pdef\s*(\d+)\s*(\d+)\s*lcc', data)[0][1])
             self.lon = int(re.findall( 'pdef\s*(\d+)\s*(\d+)\s*lcc', data)[0][0])
             self.tSize = int(re.findall( 'tdef\s*([0-9]+)\s*(.+?)\s+(.+?)\s+(.+?)\s*\n', data)[0][0])
             self.startTime = re.findall( 'tdef\s*([0-9]+)\s*(.+?)\s+(.+?)\s+(.+?)\s*\n', data)[0][2]
             self.timeInterval = re.findall( 'tdef\s*([0-9]+)\s*(.+?)\s+(.+?)\s+(.+?)\s*\n', data)[0][3]
+
+            #Try to fill levels tuple with model levels or Isobaric levels
+            if self.zType == 'linear':
+                self.levels = [i for i in range(0, self.zSize)]
+            else:
+                #Find string with levels
+                sub = re.findall( 'levels(.+?)tdef', data, re.DOTALL)
+
+                #Find numbers in that string
+                levels = re.findall( '[-+]?\d*\.\d+|\d+', sub[0] )
+
+                #Convert values
+                self.levels = [float(i) for i in levels]
 
             #Read all comments
             self.comments = {}
